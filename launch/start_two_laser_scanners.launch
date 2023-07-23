@@ -1,0 +1,15 @@
+<launch>
+  <!-- Launch Sick SickSafetyscanners Ros Driver Node for front scanner -->
+  <node pkg="sick_safetyscanners" type="sick_safetyscanners_node" name="sick_safetyscanners_front" output="screen" ns="sick_safetyscanners">
+    <param name="sensor_ip" type="string" value="192.168.1.2" />
+    <param name="host_ip" type="string" value="192.168.1.1" />
+    <param name="frame_id" type="string" value="laser_scan_front" />
+  </node>
+
+  <!-- launch Sick SickSafetyscanners Ros Driver Node for rear scanner -->
+  <node pkg="sick_safetyscanners" type="sick_safetyscanners_node" name="sick_safetyscanners_rear" output="screen" ns="sick_safetyscanners">
+    <param name="sensor_ip" type="string" value="192.168.1.3" />
+    <param name="host_ip" type="string" value="192.168.1.1" />
+    <param name="frame_id" type="string" value="laser_scan_rear"/>
+  </node>
+</launch>

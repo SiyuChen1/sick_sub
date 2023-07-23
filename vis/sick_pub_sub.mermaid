@@ -1,0 +1,41 @@
+graph LR
+  subgraph ROS System
+    subgraph ROS Master
+      m(ROS Master)
+    end
+
+    t1[Topic /scan_front]
+    t2[Topic /scan_rear]
+    t3[Topic /diagnostics]
+
+    subgraph Laser Scanner Node 1
+      l1(Laser Scanner Front)
+      l1 -.->|Registers/Lookup| m
+    end
+
+    subgraph Laser Scanner Node 2
+      l2(Laser Scanner Rear)
+      l2 -.->|Registers/Lookup| m
+    end
+
+    subgraph sick_subscriber Node
+      s(sick_subscriber Node)
+      s -.->|Registers/Lookup| m
+    end
+
+    subgraph Diagnostics Node
+      d(diagnostics Node)
+      d -.->|Registers/Lookup| m
+    end
+
+    l1 -->|Publishes LaserScan| t1
+    l2 -->|Publishes LaserScan| t2
+
+    l1 -->|Publishes DiagnosticsArray| t3
+    l2 -->|Publishes DiagnosticsArray| t3
+
+    t1 -->|Subscribes| s
+    t2 -->|Subscribes| s
+    t3 -->|Subscribes| d
+
+  end
